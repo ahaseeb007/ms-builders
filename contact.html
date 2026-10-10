@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; Payment — MS Builders | Reading, Berkshire</title>
+  <meta name="description" content="Request a free quotation from MS Builders. £50 call-out fee. Contact MAK Durrani on 07466 254999 or Samina Z Ali on 07518 510999." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="contact">
+  <main>
+    <section class="page-head" style="padding-bottom:0">
+      <div class="container">
+        <div class="contact-intro">
+          <div>
+            <span class="mono">Section 05 — Engagement</span>
+            <h1 style="margin-top:1.25rem">Request a Quotation</h1>
+          </div>
+          <div>
+            <p class="lead"><b>£50</b> fixed call-out fee · <strong>Free quotation service.</strong></p>
+            <p class="dim">Contact us by email or mobile — we aim to respond within one working day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-bottom:110px">
+      <div class="container contact-grid">
+        <form data-quote-form>
+          <div class="row-2">
+            <div class="field"><label for="q-name">Name</label><input id="q-name" name="name" placeholder="Full name" required /></div>
+            <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" placeholder="Mobile number" required /></div>
+          </div>
+          <div class="field"><label for="q-email">Email</label><input id="q-email" name="email" type="email" placeholder="you@email.com" /></div>
+          <div class="field"><label for="q-svc">Service required</label><select id="q-svc" name="service" required><option value="">Select a service…</option></select></div>
+          <div class="field"><label for="q-msg">Project details</label><textarea id="q-msg" name="message" placeholder="Describe the work needed, property type, and preferred timing…"></textarea></div>
+          <div><button type="submit" class="btn btn-dark">Send Request</button></div>
+          <p class="form-note">Opens your email app addressed to ms-builders@hotmail.com.</p>
+        </form>
+
+        <aside>
+          <div class="side-block">
+            <span class="mono">Direct contact</span>
+            <a class="side-row" href="tel:+447466254999"><span class="mono">MAK Durrani</span><strong>07466 254999</strong></a>
+            <a class="side-row" href="tel:+447518510999"><span class="mono">Samina Z Ali</span><strong>07518 510999</strong></a>
+            <a class="side-row" href="mailto:ms-builders@hotmail.com"><span class="mono">Email</span><strong>ms-builders@hotmail.com</strong></a>
+            <div class="side-row"><span class="mono">Based in</span><strong>Reading, Berkshire, UK</strong></div>
+          </div>
+
+          <div class="side-block bank" id="payment">
+            <span class="mono"><span>Payment — Bank transfer</span><span>INV_MS_BUILDERS</span></span>
+            <div class="side-row"><span class="mono">Account holder</span><strong>MS Builders</strong></div>
+            <div class="side-row"><span class="mono">Bank</span><strong>Barclays</strong></div>
+            <div class="side-row"><span class="mono">Account no.</span><span><strong>23798089</strong><button class="copy" data-copy="23798089">Copy</button></span></div>
+            <div class="side-row"><span class="mono">Sort code</span><span><strong>20-65-20</strong><button class="copy" data-copy="20-65-20">Copy</button></span></div>
+            <div class="side-row"><span class="mono">Call-out fee</span><strong>£50.00</strong></div>
+            <p class="bank-note">Quotation service is free. Use reference MSB-[Your Name] when transferring.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews — MS Builders | Reading, Berkshire</title>
+  <meta name="description" content="Leave a review for MS Builders on Trustpilot or directly with the team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="reviews">
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <span class="mono">Section 04 — Trust</span>
+        <h1>What clients say</h1>
+        <p class="lead">Your feedback keeps our standards high. Leave a review on Trustpilot, or send it straight to the team below.</p>
+      </div>
+    </section>
+
+    <section class="section" id="leave">
+      <div class="container reviews-grid">
+        <div class="card">
+          <div class="tp-brand"><i>★</i> Trustpilot</div>
+          <h3>Review us on Trustpilot</h3>
+          <p>Public, verified reviews help other customers in Reading and Berkshire choose a builder they can trust.</p>
+          <div class="tp-stars" aria-hidden="true"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="tp-actions">
+            <a data-trustpilot class="btn btn-tp">Write a review on Trustpilot</a>
+            <a data-trustpilot class="btn" style="border-color:var(--line)">Read our Trustpilot reviews</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="mono">Direct feedback</span>
+          <h3>Leave a review</h3>
+          <form id="reviewForm" style="margin-top:1.5rem">
+            <div class="field">
+              <label>Your rating</label>
+              <div class="star-input" id="starInput" role="radiogroup" aria-label="Rating">
+                <button type="button" data-v="1" aria-label="1 star">★</button>
+                <button type="button" data-v="2" aria-label="2 stars">★</button>
+                <button type="button" data-v="3" aria-label="3 stars">★</button>
+                <button type="button" data-v="4" aria-label="4 stars">★</button>
+                <button type="button" data-v="5" aria-label="5 stars">★</button>
+              </div>
+            </div>
+            <div class="row-2">
+              <div class="field"><label for="rv-name">Name</label><input id="rv-name" name="name" placeholder="Full name" required /></div>
+              <div class="field"><label for="rv-svc">Service</label><select id="rv-svc" name="service"><option value="">Select…</option></select></div>
+            </div>
+            <div class="field"><label for="rv-text">Your review</label><textarea id="rv-text" name="review" placeholder="Tell us about your experience…" required></textarea></div>
+            <div><button type="submit" class="btn btn-dark">Submit Review</button></div>
+            <p class="form-note" id="reviewNote"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

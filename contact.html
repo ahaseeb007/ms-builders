@@ -2,13 +2,15 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://media.base44.com; connect-src https://formsubmit.co; form-action 'self' https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact &amp; Payment — MS Builders | Reading, Berkshire</title>
   <meta name="description" content="Request a free quotation from MS Builders. £50 call-out fee. Contact MAK Durrani on 07466 254999 or Samina Z Ali on 07518 510999." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body data-page="contact">
   <main>
@@ -31,12 +33,12 @@
       <div class="container contact-grid">
         <form data-quote-form>
           <div class="row-2">
-            <div class="field"><label for="q-name">Name</label><input id="q-name" name="name" placeholder="Full name" required /></div>
-            <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" placeholder="Mobile number" required /></div>
+            <div class="field"><label for="q-name">Name</label><input id="q-name" name="name" placeholder="Full name" required minlength="2" maxlength="80" autocomplete="name" /></div>
+            <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" placeholder="Mobile number" required maxlength="20" pattern="[0-9 +\(\)\-]{10,20}" title="Please enter a valid phone number" autocomplete="tel" /></div>
           </div>
-          <div class="field"><label for="q-email">Email</label><input id="q-email" name="email" type="email" placeholder="you@email.com" /></div>
+          <div class="field"><label for="q-email">Email</label><input id="q-email" name="email" type="email" placeholder="you@email.com" maxlength="120" autocomplete="email" /></div>
           <div class="field"><label for="q-svc">Service required</label><select id="q-svc" name="service" required><option value="">Select a service…</option></select></div>
-          <div class="field"><label for="q-msg">Project details</label><textarea id="q-msg" name="message" placeholder="Describe the work needed, property type, and preferred timing…"></textarea></div>
+          <div class="field"><label for="q-msg">Project details</label><textarea id="q-msg" name="message" placeholder="Describe the work needed, property type, and preferred timing…" maxlength="2000"></textarea></div>
           <div><button type="submit" class="btn btn-dark">Send Request</button></div>
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
           <p class="form-note">Your request goes straight to ms-builders@hotmail.com.</p>
@@ -64,6 +66,6 @@
       </div>
     </section>
   </main>
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

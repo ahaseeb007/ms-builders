@@ -193,12 +193,35 @@ function showSuccess(name) {
 /* ---------- Quote form → sent to the business inbox via FormSubmit ---------- */
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${BUSINESS_EMAIL}`;
 
+// Per-browser rate limits for the quote form (stops accidental repeats and casual flooding).
+const RATE = { minFillMs: 3000, cooldownMs: 60_000, maxPerHour: 3, key: "msb_quote_sends" };
+const loadedAt = Date.now();
+const recentSends = () => {
+  try { return JSON.parse(localStorage.getItem(RATE.key) || "[]").filter(t => Date.now() - t < 3_600_000); }
+  catch { return []; }
+};
+const recordSend = () => {
+  try { localStorage.setItem(RATE.key, JSON.stringify([...recentSends(), Date.now()])); } catch {}
+};
+let lastSendAt = 0;
+
 $$("[data-quote-form]").forEach(form => form.addEventListener("submit", async e => {
   e.preventDefault();
   const d = Object.fromEntries(new FormData(form));
-  if (d._honey) return; // spam bot filled the hidden field
-  const btn = $("button[type=submit]", form);
   const note = $(".form-note", form);
+  if (d._honey) return; // spam bot filled the hidden field
+  if (Date.now() - loadedAt < RATE.minFillMs) return; // filled faster than a human could
+  const sends = recentSends();
+  const last = Math.max(lastSendAt, ...sends, 0);
+  if (Date.now() - last < RATE.cooldownMs) {
+    note.textContent = "You've just sent a request — please wait a minute before sending another.";
+    return;
+  }
+  if (sends.length >= RATE.maxPerHour) {
+    note.textContent = "We've received your requests. For anything urgent please call 07466 254999.";
+    return;
+  }
+  const btn = $("button[type=submit]", form);
   const label = btn.textContent;
   btn.disabled = true;
   btn.textContent = "Sending…";
@@ -220,6 +243,8 @@ $$("[data-quote-form]").forEach(form => form.addEventListener("submit", async e 
     });
     const out = await res.json().catch(() => ({}));
     if (!res.ok || String(out.success) === "false") throw new Error(out.message || "Send failed");
+    lastSendAt = Date.now();
+    recordSend();
     form.reset();
     note.textContent = "Your request goes straight to ms-builders@hotmail.com.";
     showSuccess(d.name);

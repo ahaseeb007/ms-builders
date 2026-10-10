@@ -2,13 +2,15 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://media.base44.com; connect-src https://formsubmit.co; form-action 'self' https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reviews — MS Builders | Reading, Berkshire</title>
   <meta name="description" content="Leave a review for MS Builders on Trustpilot or directly with the team." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body data-page="reviews">
   <main>
@@ -48,10 +50,10 @@
               </div>
             </div>
             <div class="row-2">
-              <div class="field"><label for="rv-name">Name</label><input id="rv-name" name="name" placeholder="Full name" required /></div>
+              <div class="field"><label for="rv-name">Name</label><input id="rv-name" name="name" placeholder="Full name" required maxlength="80" /></div>
               <div class="field"><label for="rv-svc">Service</label><select id="rv-svc" name="service"><option value="">Select…</option></select></div>
             </div>
-            <div class="field"><label for="rv-text">Your review</label><textarea id="rv-text" name="review" placeholder="Tell us about your experience…" required></textarea></div>
+            <div class="field"><label for="rv-text">Your review</label><textarea id="rv-text" name="review" placeholder="Tell us about your experience…" required maxlength="2000"></textarea></div>
             <div><button type="submit" class="btn btn-dark">Submit Review</button></div>
             <p class="form-note" id="reviewNote"></p>
           </form>
@@ -59,6 +61,6 @@
       </div>
     </section>
   </main>
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

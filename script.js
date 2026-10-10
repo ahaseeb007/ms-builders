@@ -164,14 +164,45 @@ $$(".ba").forEach(ba => {
 /* ---------- Trustpilot links ---------- */
 $$("[data-trustpilot]").forEach(a => { a.href = TRUSTPILOT_URL; a.target = "_blank"; a.rel = "noopener"; });
 
-/* ---------- Quote form → email ---------- */
-$$("[data-quote-form]").forEach(form => form.addEventListener("submit", e => {
+/* ---------- Quote form → sent to the business inbox via FormSubmit ---------- */
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${BUSINESS_EMAIL}`;
+
+$$("[data-quote-form]").forEach(form => form.addEventListener("submit", async e => {
   e.preventDefault();
   const d = Object.fromEntries(new FormData(form));
-  const body = [`Name: ${d.name}`, `Phone: ${d.phone}`, d.email && `Email: ${d.email}`, `Service: ${d.service}`, d.message && `\nProject details:\n${d.message}`]
-    .filter(Boolean).join("\n");
-  location.href = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent("Quotation request — " + d.service)}&body=${encodeURIComponent(body)}`;
-  toast("Opening your email app…");
+  if (d._honey) return; // spam bot filled the hidden field
+  const btn = $("button[type=submit]", form);
+  const note = $(".form-note", form);
+  const label = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = "Sending…";
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: `New quotation request — ${d.service}`,
+        _template: "table",
+        _captcha: "false",
+        ...(d.email && { _replyto: d.email }),
+        Name: d.name,
+        Phone: d.phone,
+        Email: d.email || "-",
+        Service: d.service,
+        "Project details": d.message || "-",
+      }),
+    });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || String(out.success) === "false") throw new Error(out.message || "Send failed");
+    form.reset();
+    note.textContent = "Thank you — your request has been sent. We'll be in touch within one working day.";
+    toast("Request sent ✓");
+  } catch {
+    note.innerHTML = `Sorry, that didn't send. Please call 07466 254999 or email <a href="mailto:${BUSINESS_EMAIL}">${BUSINESS_EMAIL}</a>.`;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = label;
+  }
 }));
 
 /* ---------- Review form → email ---------- */

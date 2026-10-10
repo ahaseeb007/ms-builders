@@ -199,6 +199,18 @@ textarea { resize: vertical; min-height: 140px; }
 .toast { position: fixed; left: 50%; bottom: 84px; transform: translate(-50%, 40px); opacity: 0; background: var(--dark); color: #fff; padding: .8rem 1.25rem; font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; transition: .3s; z-index: 80; pointer-events: none; }
 .toast.show { transform: translate(-50%, 0); opacity: 1; }
 
+/* Success popup */
+.modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 16px; background: rgba(17,17,17,.55); backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s; }
+.modal.open { opacity: 1; visibility: visible; }
+.modal-box { width: min(460px, 100%); background: var(--paper); border: 1px solid var(--line); padding: 2.5rem 2rem 2rem; text-align: center; transform: translateY(16px) scale(.97); transition: transform .3s ease; }
+.modal.open .modal-box { transform: none; }
+.modal-check { width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%; background: var(--dark); color: #fff; display: grid; place-items: center; font-size: 1.8rem; }
+.modal-box h3 { font-size: 1.9rem; margin: .75rem 0 1rem; }
+.modal-box p { margin-bottom: .75rem; }
+.modal-box p.dim { font-size: .9rem; }
+.modal-box a { text-decoration: underline; text-underline-offset: 3px; }
+.modal-box .btn { margin-top: 1rem; min-width: 160px; }
+
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 

@@ -164,6 +164,32 @@ $$(".ba").forEach(ba => {
 /* ---------- Trustpilot links ---------- */
 $$("[data-trustpilot]").forEach(a => { a.href = TRUSTPILOT_URL; a.target = "_blank"; a.rel = "noopener"; });
 
+/* ---------- Success popup ---------- */
+function showSuccess(name) {
+  let modal = $("#successModal");
+  if (!modal) {
+    document.body.insertAdjacentHTML("beforeend", `
+      <div class="modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+        <div class="modal-box">
+          <div class="modal-check" aria-hidden="true">✓</div>
+          <span class="mono">Request received</span>
+          <h3 id="successTitle"></h3>
+          <p>Your quotation request has been submitted successfully. Our team will reach out to you within <strong>24 hours</strong>.</p>
+          <p class="dim">Need us sooner? Call <a href="tel:+447466254999">07466 254999</a> or <a href="tel:+447518510999">07518 510999</a>.</p>
+          <button type="button" class="btn btn-dark" data-close>Done</button>
+        </div>
+      </div>`);
+    modal = $("#successModal");
+    const close = () => modal.classList.remove("open");
+    $("[data-close]", modal).addEventListener("click", close);
+    modal.addEventListener("click", e => e.target === modal && close());
+    document.addEventListener("keydown", e => e.key === "Escape" && close());
+  }
+  $("#successTitle", modal).textContent = name ? `Thank you, ${name.split(" ")[0]}!` : "Thank you!";
+  modal.classList.add("open");
+  $("[data-close]", modal).focus();
+}
+
 /* ---------- Quote form → sent to the business inbox via FormSubmit ---------- */
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${BUSINESS_EMAIL}`;
 
@@ -195,8 +221,8 @@ $$("[data-quote-form]").forEach(form => form.addEventListener("submit", async e 
     const out = await res.json().catch(() => ({}));
     if (!res.ok || String(out.success) === "false") throw new Error(out.message || "Send failed");
     form.reset();
-    note.textContent = "Thank you — your request has been sent. We'll be in touch within one working day.";
-    toast("Request sent ✓");
+    note.textContent = "Your request goes straight to ms-builders@hotmail.com.";
+    showSuccess(d.name);
   } catch {
     note.innerHTML = `Sorry, that didn't send. Please call 07466 254999 or email <a href="mailto:${BUSINESS_EMAIL}">${BUSINESS_EMAIL}</a>.`;
   } finally {
